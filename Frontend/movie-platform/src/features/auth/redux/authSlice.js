@@ -7,9 +7,6 @@ const initialState = {
   loading: false,
   error: null,
 };
-
-
-
 // --- Thunks ---
 
 export const toggleFavorite = createAsyncThunk(
@@ -39,11 +36,14 @@ export const toggleFavorite = createAsyncThunk(
 
 export const register = createAsyncThunk("auth/register", async (data) => {
   const response = await registerUser(data);
+  console.log("Register" , response)
   return response;
 });
 
 export const login = createAsyncThunk("auth/login", async (data) => {
+  console.log("Login Data:", data)
   const response = await loginUser(data);
+  console.log(response , "response")
   return response; 
 });
 
@@ -67,6 +67,8 @@ const authSlice = createSlice({
       .addCase(login.pending, (state) => { state.loading = true; })
       .addCase(register.pending, (state) => { state.loading = true; })
       .addCase(fetchUser.pending, (state) => { state.loading = true; })
+
+    
 
       // --- Success Cases ---
       .addCase(register.fulfilled, (state, action) => {

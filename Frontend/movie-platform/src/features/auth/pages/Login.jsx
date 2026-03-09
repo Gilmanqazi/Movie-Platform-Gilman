@@ -2,13 +2,17 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../Hook/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {toast} from "react-toastify"
+
 
 const Login = () => {
   const navigate = useNavigate();
   const { handleLogin } = useAuth();
   
+  
   // Redux state se user aur loading uthayenge
   const { user, loading } = useSelector((state) => state.auth);
+  console.log(user)
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,12 +26,13 @@ const Login = () => {
     }
   };
 
-  // Login success hote hi Home par redirect
+  
+ 
   useEffect(() => {
-    if (user) {
-      navigate("/");
+    if (!loading && user) {
+      navigate("/", { replace: true });
     }
-  }, [user, navigate]);
+  }, [user, loading]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black relative overflow-hidden">

@@ -2,19 +2,22 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../Hook/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {toast} from "react-toastify"
 
 const Register = () => {
   const navigate = useNavigate();
   const { handleRegister } = useAuth();
   
-  // Redux se state nikalna validation errors dikhane ke liye
+
   const { user, loading, error } = useSelector((state) => state.auth);
+  console.log("Register",user)
 
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,10 +32,10 @@ const Register = () => {
     }
   };
 
-  // Agar user successfully register ho jaye toh Home bhej do
   useEffect(() => {
     if (user) {
       navigate("/");
+      toast.success("Registration Successfull")
     }
   }, [user, navigate]);
 

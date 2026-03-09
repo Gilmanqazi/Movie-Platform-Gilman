@@ -1,6 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import {useNavigate} from "react-router-dom"
 import { useState } from "react";
-import { useAuth } from "../features/auth/Hook/useAuth";
+import { useAuth } from "../features/auth/Hook/useAuth"
 import { useSelector } from "react-redux";
 
 function Navbar() {
@@ -18,8 +19,12 @@ function Navbar() {
   };
 
   const onLogoutClick = async () => {
-    await handleLogout(); // Function call kiya
-    navigate("/login"); // Direct login par bhej diya
+    
+    if(user){
+      await handleLogout() 
+      navigate("/login", { replace: true })
+    }
+
   };
 
   return (
@@ -75,7 +80,7 @@ function Navbar() {
                 Hi, <span className="text-white font-medium">{user.username}</span>
               </span>
               <button 
-                onClick={onLogoutClick}
+                onClick={()=>{onLogoutClick()}}
                 className="bg-[#252525] border border-white/10 px-5 py-2 rounded-lg text-sm font-bold hover:bg-white hover:text-black active:scale-95 transition-all"
               >
                 Logout
