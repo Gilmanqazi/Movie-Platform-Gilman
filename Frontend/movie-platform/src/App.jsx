@@ -39,13 +39,13 @@ const App = () => {
       <Routes>
         {/* Protected Routes */}
         <Route path='/' element={
-          <ProtectedRoute>
+         
             <Home />
-          </ProtectedRoute>
+         
         } />
-        <Route path="/movies" element={<ProtectedRoute><Movies /></ProtectedRoute>} />
-  <Route path="/tv" element={<ProtectedRoute><TvShows /></ProtectedRoute>} />
-  <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
+        <Route path="/movies" element={<Movies/>} />
+  <Route path="/tv" element={<TvShows />} />
+  <Route path="/favorites" element={<Favorites/> } /> 
 
         {/* Public Routes */}
         <Route path='/search' element={<Search />} />
